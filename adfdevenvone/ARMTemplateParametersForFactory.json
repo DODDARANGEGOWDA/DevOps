@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfdevenvone"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"connectinghost services_connectionString": {
+			"value": ""
+		},
+		"isSqlServer1dynamic_connectionString": {
+			"value": "integrated security=True;Data Source=Z1-471\\SQLEXPRESS;Initial Catalog=@{linkedService().daname}"
+		},
+		"isSqlServer1dynamic_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://storageaccountnametwo.dfs.core.windows.net/"
+		},
+		"isSqlServer1dynamic_properties_typeProperties_userName": {
+			"value": "Z1-471\\acer"
+		}
+	}
+}
