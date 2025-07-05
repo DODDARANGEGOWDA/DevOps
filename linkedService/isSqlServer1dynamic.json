@@ -1,0 +1,22 @@
+{
+	"name": "isSqlServer1dynamic",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"daname": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=Z1-471\\SQLEXPRESS;initial catalog=@{linkedService().daname}",
+			"userName": "Z1-471\\acer",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1NGE4OTcxYS0wYWZhLTQxMDMtOTBhOC0zMTk4YmI5Y2FlYjEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

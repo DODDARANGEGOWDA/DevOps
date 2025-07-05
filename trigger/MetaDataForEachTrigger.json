@@ -1,0 +1,25 @@
+{
+	"name": "MetaDataForEachTrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "MetaDataForEach",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 1,
+				"startTime": "2025-07-05T12:58:00",
+				"endTime": "2025-07-06T01:10:01",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

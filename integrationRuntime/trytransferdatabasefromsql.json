@@ -1,0 +1,6 @@
+{
+	"name": "trytransferdatabasefromsql",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

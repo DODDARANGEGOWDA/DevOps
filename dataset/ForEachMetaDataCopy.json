@@ -1,0 +1,97 @@
+{
+	"name": "ForEachMetaDataCopy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Insideforeachsourcesdataset": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().Insideforeachsourcesdataset",
+					"type": "Expression"
+				},
+				"fileSystem": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Country",
+				"type": "String"
+			},
+			{
+				"name": "Year",
+				"type": "String"
+			},
+			{
+				"name": "Rank",
+				"type": "String"
+			},
+			{
+				"name": "Total",
+				"type": "String"
+			},
+			{
+				"name": "S1: Demographic Pressures",
+				"type": "String"
+			},
+			{
+				"name": "S2: Refugees and IDPs",
+				"type": "String"
+			},
+			{
+				"name": "C3: Group Grievance",
+				"type": "String"
+			},
+			{
+				"name": "E3: Human Flight and Brain Drain",
+				"type": "String"
+			},
+			{
+				"name": "E2: Economic Inequality",
+				"type": "String"
+			},
+			{
+				"name": "E1: Economy",
+				"type": "String"
+			},
+			{
+				"name": "P1: State Legitimacy",
+				"type": "String"
+			},
+			{
+				"name": "P2: Public Services",
+				"type": "String"
+			},
+			{
+				"name": "P3: Human Rights",
+				"type": "String"
+			},
+			{
+				"name": "C1: Security Apparatus",
+				"type": "String"
+			},
+			{
+				"name": "C2: Factionalized Elites",
+				"type": "String"
+			},
+			{
+				"name": "X1: External Intervention",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
