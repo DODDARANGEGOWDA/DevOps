@@ -14,7 +14,7 @@
 				"typeProperties": {
 					"variableName": "Time",
 					"value": {
-						"value": "@utcNow()",
+						"value": "@utcNow('formatDateTime()')",
 						"type": "Expression"
 					}
 				}
