@@ -1,0 +1,19 @@
+{
+	"name": "SqlServerTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "isSqlServer1dynamic",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"daname": "GOWDA"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DOWNLOADGOWDA"
+		}
+	}
+}
