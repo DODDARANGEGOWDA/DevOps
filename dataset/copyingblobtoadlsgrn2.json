@@ -1,0 +1,31 @@
+{
+	"name": "copyingblobtoadlsgrn2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Get_metaLinked_Services_Sources",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"copy2soucresblob": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().copy2soucresblob",
+					"type": "Expression"
+				},
+				"fileSystem": "containerblob"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
