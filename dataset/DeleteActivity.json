@@ -1,0 +1,18 @@
+{
+	"name": "DeleteActivity",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Get_metaLinked_Services_Sources",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "AzureStorageAccounts.csv",
+				"fileSystem": "containerblob"
+			}
+		}
+	}
+}
