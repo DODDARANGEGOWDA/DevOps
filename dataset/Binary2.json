@@ -1,0 +1,26 @@
+{
+	"name": "Binary2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Get_metaLinked_Services_Sources",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"delete2": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().delete2",
+					"type": "Expression"
+				},
+				"fileSystem": "containeraglsgen2"
+			}
+		}
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"name": "Binary1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Get_metaLinked_Services_Sources",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"deleteone": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().deleteone",
+					"type": "Expression"
+				},
+				"fileSystem": "containerblob"
+			}
+		}
+	}
+}
