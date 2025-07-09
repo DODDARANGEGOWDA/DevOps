@@ -76,11 +76,20 @@
 					"connectinghost services_connectionString": {
 						"value": "[parameters('connectinghost services_connectionString')]"
 					},
+					"isSqlServer1dynamic_connectionString": {
+						"value": "[parameters('isSqlServer1dynamic_connectionString')]"
+					},
+					"isSqlServer1dynamic_password": {
+						"value": "[parameters('isSqlServer1dynamic_password')]"
+					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
 					},
 					"Get_metaLinked_Services_Sources_properties_typeProperties_url": {
 						"value": "[parameters('Get_metaLinked_Services_Sources_properties_typeProperties_url')]"
+					},
+					"isSqlServer1dynamic_properties_typeProperties_userName": {
+						"value": "[parameters('isSqlServer1dynamic_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -99,15 +108,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"isSqlServer1dynamic_connectionString": {
-						"value": "[parameters('isSqlServer1dynamic_connectionString')]"
-					},
-					"isSqlServer1dynamic_password": {
-						"value": "[parameters('isSqlServer1dynamic_password')]"
-					},
-					"isSqlServer1dynamic_properties_typeProperties_userName": {
-						"value": "[parameters('isSqlServer1dynamic_properties_typeProperties_userName')]"
 					}
 				}
 			},
