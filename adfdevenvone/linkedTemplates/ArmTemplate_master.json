@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
 		},
+		"Get_metaLinked_Services_Sources_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Get_metaLinked_Services_Sources'"
+		},
 		"connectinghost services_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'connectinghost services'"
@@ -25,6 +29,10 @@
 			"metadata": "Secure string for 'password' of 'isSqlServer1dynamic'"
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storageaccountnametwo.dfs.core.windows.net/"
+		},
+		"Get_metaLinked_Services_Sources_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://storageaccountnametwo.dfs.core.windows.net/"
 		},
@@ -62,8 +70,35 @@
 					"AzureDataLakeStorage1_accountKey": {
 						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
 					},
+					"Get_metaLinked_Services_Sources_accountKey": {
+						"value": "[parameters('Get_metaLinked_Services_Sources_accountKey')]"
+					},
 					"connectinghost services_connectionString": {
 						"value": "[parameters('connectinghost services_connectionString')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"Get_metaLinked_Services_Sources_properties_typeProperties_url": {
+						"value": "[parameters('Get_metaLinked_Services_Sources_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adfdevenvone_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"isSqlServer1dynamic_connectionString": {
 						"value": "[parameters('isSqlServer1dynamic_connectionString')]"
@@ -71,15 +106,14 @@
 					"isSqlServer1dynamic_password": {
 						"value": "[parameters('isSqlServer1dynamic_password')]"
 					},
-					"AzureDataLakeStorage1_properties_typeProperties_url": {
-						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
-					},
 					"isSqlServer1dynamic_properties_typeProperties_userName": {
 						"value": "[parameters('isSqlServer1dynamic_properties_typeProperties_userName')]"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfdevenvone_ArmTemplate_0')]"
+			]
 		}
 	]
 }

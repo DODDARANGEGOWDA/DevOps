@@ -8,6 +8,9 @@
 		"AzureDataLakeStorage1_accountKey": {
 			"value": ""
 		},
+		"Get_metaLinked_Services_Sources_accountKey": {
+			"value": ""
+		},
 		"connectinghost services_connectionString": {
 			"value": ""
 		},
@@ -18,6 +21,9 @@
 			"value": ""
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://storageaccountnametwo.dfs.core.windows.net/"
+		},
+		"Get_metaLinked_Services_Sources_properties_typeProperties_url": {
 			"value": "https://storageaccountnametwo.dfs.core.windows.net/"
 		},
 		"isSqlServer1dynamic_properties_typeProperties_userName": {
