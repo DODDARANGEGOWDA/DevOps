@@ -57,7 +57,7 @@
 						"typeProperties": {
 							"variableName": "Passing_Variable",
 							"value": {
-								"value": "@pipeline().parameters.Per_Fixing_date",
+								"value": "@utcNow('adddays()''addhours()''addminutes()')",
 								"type": "Expression"
 							}
 						}
