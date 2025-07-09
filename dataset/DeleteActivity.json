@@ -5,12 +5,20 @@
 			"referenceName": "Get_metaLinked_Services_Sources",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"Delete": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "AzureStorageAccounts.csv",
+				"fileName": {
+					"value": "@dataset().Delete",
+					"type": "Expression"
+				},
 				"fileSystem": "containerblob"
 			}
 		}
