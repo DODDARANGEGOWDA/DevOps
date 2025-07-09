@@ -1,0 +1,83 @@
+{
+	"name": "PL_Dev_SetVariable",
+	"properties": {
+		"activities": [
+			{
+				"name": "SetvariableOne",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "SetOne",
+					"value": {
+						"value": "@utcNow()",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Setvariable2",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "SetVariableTwo",
+					"value": {
+						"value": "@utcNow('formatDateTime()')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variableThree",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "SetvariableOne",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Setvariable2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "SetThree",
+					"value": {
+						"value": "@utcNow('adddays()')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"SetOne": {
+				"type": "String"
+			},
+			"SetVariableTwo": {
+				"type": "String"
+			},
+			"SetThree": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
