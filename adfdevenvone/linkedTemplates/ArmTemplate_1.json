@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfdevenvone"
 		},
+		"connectinghost services_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'connectinghost services'"
+		},
 		"isSqlServer1dynamic_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'isSqlServer1dynamic'",
@@ -25,6 +29,23 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/connectinghost services')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('connectinghost services_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/isSqlServer1dynamic')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -53,27 +74,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DeleteActivity')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Get_metaLinked_Services_Sources",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "AzureStorageAccounts.csv",
-						"fileSystem": "containerblob"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/PL_Delite_Variable')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -95,14 +95,16 @@
 							"dataset": {
 								"referenceName": "DeleteActivity",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"Delete": "AzureStorageAccounts.csv"
+								}
 							},
 							"logStorageSettings": {
 								"linkedServiceName": {
 									"referenceName": "Get_metaLinked_Services_Sources",
 									"type": "LinkedServiceReference"
 								},
-								"path": "containerblob"
+								"path": ""
 							},
 							"enableLogging": true,
 							"storeSettings": {
@@ -118,9 +120,7 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DeleteActivity')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_Dev_CopyingToBlobToAdlsGen2_Load')]",

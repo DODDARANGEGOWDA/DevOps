@@ -15,10 +15,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'Get_metaLinked_Services_Sources'"
 		},
-		"connectinghost services_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'connectinghost services'"
-		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://storageaccountnametwo.dfs.core.windows.net/"
@@ -299,6 +295,37 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DeleteActivity')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Get_metaLinked_Services_Sources",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Delete": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().Delete",
+							"type": "Expression"
+						},
+						"fileSystem": "containerblob"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Get_metaLinked_Services_Sources')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ForEachMetaDataCopy')]",
@@ -748,25 +775,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Get_metaLinked_Services_Sources')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/connectinghost services')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('connectinghost services_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
 			]
 		}
 	]
