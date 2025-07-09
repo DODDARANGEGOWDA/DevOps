@@ -1,6 +1,12 @@
 {
 	"name": "PL_Dev_CopyingToBlobToAdlsGen2_Load",
 	"properties": {
+		"parameters": {
+			"sdfdsa": {
+				"type": "String",
+				"defaultValue": "aa"
+			}
+		},
 		"annotations": []
 	}
 }
