@@ -19,15 +19,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'connectinghost services'"
 		},
-		"isSqlServer1dynamic_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'isSqlServer1dynamic'",
-			"defaultValue": "integrated security=True;Data Source=Z1-471\\SQLEXPRESS;Initial Catalog=@{linkedService().daname}"
-		},
-		"isSqlServer1dynamic_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'isSqlServer1dynamic'"
-		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://storageaccountnametwo.dfs.core.windows.net/"
@@ -35,10 +26,6 @@
 		"Get_metaLinked_Services_Sources_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://storageaccountnametwo.dfs.core.windows.net/"
-		},
-		"isSqlServer1dynamic_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "Z1-471\\acer"
 		}
 	},
 	"variables": {
@@ -269,6 +256,47 @@
 			"properties": {
 				"type": "SelfHosted",
 				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_Dev_Appendvariables')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Append variable1",
+						"type": "AppendVariable",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ListOfFiles",
+							"value": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"ListOfFiles": {
+						"type": "Array",
+						"defaultValue": [
+							"SalesUS",
+							"SalesUK"
+						]
+					}
+				},
+				"annotations": []
 			},
 			"dependsOn": []
 		},
@@ -731,35 +759,6 @@
 				"type": "SqlServer",
 				"typeProperties": {
 					"connectionString": "[parameters('connectinghost services_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/isSqlServer1dynamic')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"parameters": {
-					"daname": {
-						"type": "String"
-					}
-				},
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('isSqlServer1dynamic_connectionString')]",
-					"userName": "[parameters('isSqlServer1dynamic_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('isSqlServer1dynamic_password')]"
-					}
 				},
 				"connectVia": {
 					"referenceName": "integrationRuntime1",
