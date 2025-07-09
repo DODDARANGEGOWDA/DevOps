@@ -1,0 +1,38 @@
+{
+	"name": "PL_Dev_SetVariables_Details",
+	"properties": {
+		"activities": [
+			{
+				"name": "SetvariableFixingDate",
+				"type": "SetVariable",
+				"state": "Active",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Passing_Variable",
+					"value": {
+						"value": "@pipeline().parameters.Per_Fixing_date",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Per_Fixing_date": {
+				"type": "String",
+				"defaultValue": "none"
+			}
+		},
+		"variables": {
+			"Passing_Variable": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
