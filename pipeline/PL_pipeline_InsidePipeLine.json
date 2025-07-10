@@ -1,25 +1,6 @@
 {
 	"name": "PL_pipeline_InsidePipeLine",
 	"properties": {
-		"activities": [
-			{
-				"name": "SetvariableOne",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "SetVeriable",
-					"value": {
-						"value": "@utcNow()",
-						"type": "Expression"
-					}
-				}
-			}
-		],
 		"variables": {
 			"SetVeriable": {
 				"type": "String"
