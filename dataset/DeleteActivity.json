@@ -19,7 +19,7 @@
 					"value": "@dataset().Delete",
 					"type": "Expression"
 				},
-				"fileSystem": "containerblob"
+				"fileSystem": "containeraglsgen2"
 			}
 		}
 	}
