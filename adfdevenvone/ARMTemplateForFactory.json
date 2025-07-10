@@ -1526,7 +1526,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "SetvariableOne",
+						"name": "Set variableOne",
 						"type": "SetVariable",
 						"dependsOn": [],
 						"policy": {
@@ -1541,6 +1541,54 @@
 								"type": "Expression"
 							}
 						}
+					},
+					{
+						"name": "PL_Dev_CopyingToBlobToAdlsGen2_Load",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Set variableOne",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_Dev_CopyingToBlobToAdlsGen2_Load",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "PL_Delite_Variable",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "PL_Dev_CopyingToBlobToAdlsGen2_Load",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_Delite_Variable",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
 					}
 				],
 				"policy": {
@@ -1553,7 +1601,10 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_Dev_CopyingToBlobToAdlsGen2_Load')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_Delite_Variable')]"
+			]
 		}
 	]
 }
