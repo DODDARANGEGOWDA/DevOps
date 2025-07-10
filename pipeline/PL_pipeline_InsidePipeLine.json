@@ -1,6 +1,71 @@
 {
 	"name": "PL_pipeline_InsidePipeLine",
 	"properties": {
+		"activities": [
+			{
+				"name": "Set variableOne",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "SetVeriable",
+					"value": {
+						"value": "@utcNow()",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "PL_Dev_CopyingToBlobToAdlsGen2_Load",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Set variableOne",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_Dev_CopyingToBlobToAdlsGen2_Load",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PL_Delite_Variable",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_Dev_CopyingToBlobToAdlsGen2_Load",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_Delite_Variable",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
 		"variables": {
 			"SetVeriable": {
 				"type": "String"
