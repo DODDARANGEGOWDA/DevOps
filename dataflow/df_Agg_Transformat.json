@@ -1,0 +1,59 @@
+{
+	"name": "df_Agg_Transformat",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_empdep_sources",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Eid as integer,",
+				"          Ename as string,",
+				"          Enum as integer,",
+				"          Email as string,",
+				"          EmAnager as string,",
+				"          Esal as integer,",
+				"          DOJ as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> source1",
+				"source1 derive(AddDays = addDays(toDate(DOJ,'yyyy-dd-MM','en-US'),-7)) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          EMPLOYEEID = Eid,",
+				"          Ename,",
+				"          Enum,",
+				"          Email,",
+				"          EmAnager,",
+				"          DOJ,",
+				"          AddDays",
+				"     ),",
+				"     partitionBy('hash', 1),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 filter(endsWith(Ename,'A'),",
+				"     partitionBy('hash', 1)) ~> filter1"
+			]
+		}
+	}
+}
