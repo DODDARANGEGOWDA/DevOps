@@ -669,7 +669,7 @@
 				"schema": [],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "DOWNLOADGOWDA"
+					"table": "Employess"
 				}
 			},
 			"dependsOn": [
