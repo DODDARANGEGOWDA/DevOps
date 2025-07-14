@@ -15,13 +15,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataset": {
-						"referenceName": "DeleteActivity",
-						"type": "DatasetReference",
-						"parameters": {
-							"Delete": "AzureStorageAccounts.csv"
-						}
-					},
 					"logStorageSettings": {
 						"linkedServiceName": {
 							"referenceName": "Get_metaLinked_Services_Sources",
