@@ -41,25 +41,6 @@
 					},
 					"waitOnCompletion": true
 				}
-			},
-			{
-				"name": "PL_Delite_Variable",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "PL_Dev_CopyingToBlobToAdlsGen2_Load",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"waitOnCompletion": true
-				}
 			}
 		],
 		"variables": {
