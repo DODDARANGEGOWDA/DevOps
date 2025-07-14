@@ -28,6 +28,15 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'isSqlServer1dynamic'"
 		},
+		"ls_sqlServer_dynamic_Dell_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_sqlServer_dynamic_Dell'",
+			"defaultValue": "integrated security=True;Data Source=DESKTOP-OGG0RHF\\SQLEXPRESS;Initial Catalog=DELL"
+		},
+		"ls_sqlServer_dynamic_Dell_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_sqlServer_dynamic_Dell'"
+		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://storageaccountnametwo.dfs.core.windows.net/"
@@ -39,6 +48,10 @@
 		"isSqlServer1dynamic_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "Z1-471\\acer"
+		},
+		"ls_sqlServer_dynamic_Dell_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "DESKTOP-OGG0RHF\\Administrator"
 		},
 		"containerUri": {
 			"type": "string",
@@ -106,8 +119,17 @@
 					"isSqlServer1dynamic_password": {
 						"value": "[parameters('isSqlServer1dynamic_password')]"
 					},
+					"ls_sqlServer_dynamic_Dell_connectionString": {
+						"value": "[parameters('ls_sqlServer_dynamic_Dell_connectionString')]"
+					},
+					"ls_sqlServer_dynamic_Dell_password": {
+						"value": "[parameters('ls_sqlServer_dynamic_Dell_password')]"
+					},
 					"isSqlServer1dynamic_properties_typeProperties_userName": {
 						"value": "[parameters('isSqlServer1dynamic_properties_typeProperties_userName')]"
+					},
+					"ls_sqlServer_dynamic_Dell_properties_typeProperties_userName": {
+						"value": "[parameters('ls_sqlServer_dynamic_Dell_properties_typeProperties_userName')]"
 					}
 				}
 			},

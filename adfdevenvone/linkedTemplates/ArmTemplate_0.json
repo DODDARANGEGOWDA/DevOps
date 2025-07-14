@@ -237,6 +237,16 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SelfHostedintegrationRuntime')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/connecting')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -348,37 +358,6 @@
 						"type": "AzureBlobFSLocation",
 						"fileName": {
 							"value": "@dataset().delete2",
-							"type": "Expression"
-						},
-						"fileSystem": "containeraglsgen2"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Get_metaLinked_Services_Sources')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DeleteActivity')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Get_metaLinked_Services_Sources",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"Delete": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": {
-							"value": "@dataset().Delete",
 							"type": "Expression"
 						},
 						"fileSystem": "containeraglsgen2"
