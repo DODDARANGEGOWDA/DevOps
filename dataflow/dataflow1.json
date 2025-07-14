@@ -69,7 +69,7 @@
 				"          Date_of_birth as string,",
 				"          Job_Title as string",
 				"     ),",
-				"     filePattern:'emp',",
+				"     filePattern:'emp.csv',",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
