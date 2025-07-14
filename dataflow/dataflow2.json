@@ -18,7 +18,11 @@
 						"referenceName": "DelimitedText3",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "sink1",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureDataLakeStorage1",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [
@@ -68,11 +72,13 @@
 				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     filePattern:'Apple',",
+				"     truncate: true,",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     quoteAll: true) ~> sink1"
 			]
 		}
 	}
