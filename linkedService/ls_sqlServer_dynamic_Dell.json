@@ -5,9 +5,9 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=True;data source=DESKTOP-OGG0RHF\\SQLEXPRESS;initial catalog=DELL",
+			"connectionString": "integrated security=True;data source=DESKTOP-OGG0RHF\\SQLEXPRESS;initial catalog=HP",
 			"userName": "DESKTOP-OGG0RHF\\Administrator",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIyNWQ3Y2FhZC01NTVhLTQ3NGUtYTQzZi1kODZjNzllYzdkNGIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmNjBkYzA4Ny1kZjdjLTRlMGYtYmI2Yy0yY2NjYjI1YjMzMzYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "SelfHostedintegrationRuntime",
