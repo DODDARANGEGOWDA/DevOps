@@ -5,11 +5,19 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "DelimitedText3",
+						"type": "DatasetReference"
+					},
 					"name": "source1"
 				}
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "DelimitedText4",
+						"type": "DatasetReference"
+					},
 					"name": "sink1"
 				}
 			],
@@ -25,14 +33,9 @@
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          Eid as integer,",
-				"          Ename as string,",
-				"          DOJ as date 'yyyy-MM-dd',",
-				"          Dep as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
 				"     partitionBy('hash', 1)) ~> source1",
 				"source1 derive(AddDays = addDays(DOJ, 5),",
 				"     partitionBy('hash', 1)) ~> derivedColumn1",
@@ -49,11 +52,23 @@
 				"     partitionBy('hash', 1)) ~> filter1",
 				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          IndexOne as string,",
+				"          User_IdTwo as string,",
+				"          First_NameT as string,",
+				"          Last_NameF as string,",
+				"          SexF as string,",
+				"          EmailS as string,",
+				"          Date_of_birthSE as string,",
+				"          Job_TitleEI as string,",
+				"          extra as string",
+				"     ),",
 				"     filePattern:'emp.csv',",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
+				"     umask: 0022,",
 				"     preCommands: [],",
-				"     postCommands: []) ~> sink1"
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
