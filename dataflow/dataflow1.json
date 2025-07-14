@@ -1,0 +1,80 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText2",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Eid as integer,",
+				"          Ename as string,",
+				"          DOJ as date 'yyyy-MM-dd',",
+				"          Dep as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> source1",
+				"source1 derive(AddDays = addDays(DOJ, 5),",
+				"     partitionBy('hash', 1)) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          EmployeeID = Eid,",
+				"          Ename,",
+				"          DOJ,",
+				"          AddDays",
+				"     ),",
+				"     partitionBy('hash', 1),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 filter(substring(Ename, 1, 2)=='SA') ~> filter1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Index as string,",
+				"          User_Id as string,",
+				"          First_Name as string,",
+				"          Last_Name as string,",
+				"          Sex as string,",
+				"          Email as string,",
+				"          Phone as string,",
+				"          Date_of_birth as string,",
+				"          Job_Title as string",
+				"     ),",
+				"     partitionFileNames:['Deri_Filter_Apply.csv'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}
