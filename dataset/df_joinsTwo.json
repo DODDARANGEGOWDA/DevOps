@@ -1,0 +1,40 @@
+{
+	"name": "df_joinsTwo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "dbo.EMP.csv",
+				"fileSystem": "output"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Empid",
+				"type": "String"
+			},
+			{
+				"name": "Ename",
+				"type": "String"
+			},
+			{
+				"name": "Enum",
+				"type": "String"
+			},
+			{
+				"name": "Email",
+				"type": "String"
+			}
+		]
+	}
+}
