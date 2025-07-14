@@ -1,0 +1,35 @@
+{
+	"name": "SqlServerTable4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sqlServer_dynamic_Dell",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Empid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Ename",
+				"type": "char"
+			},
+			{
+				"name": "Enum",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Email",
+				"type": "char"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Cus"
+		}
+	}
+}
