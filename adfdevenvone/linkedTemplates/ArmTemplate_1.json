@@ -43,6 +43,239 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/GetMetaData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Get_metaLinked_Services_Sources",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "input"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "NAME",
+						"type": "String"
+					},
+					{
+						"name": "TYPE",
+						"type": "String"
+					},
+					{
+						"name": "KIND",
+						"type": "String"
+					},
+					{
+						"name": "RESOURCE GROUP",
+						"type": "String"
+					},
+					{
+						"name": "LOCATION",
+						"type": "String"
+					},
+					{
+						"name": "SUBSCRIPTION",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Inside_For_Each_Sources_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Get_metaLinked_Services_Sources",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"inside_foreach_sources": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().inside_foreach_sources",
+							"type": "Expression"
+						},
+						"fileSystem": "input"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "NAME",
+						"type": "String"
+					},
+					{
+						"name": "TYPE",
+						"type": "String"
+					},
+					{
+						"name": "KIND",
+						"type": "String"
+					},
+					{
+						"name": "RESOURCE GROUP",
+						"type": "String"
+					},
+					{
+						"name": "LOCATION",
+						"type": "String"
+					},
+					{
+						"name": "SUBSCRIPTION",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OnprimetoCloud')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "output"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Country",
+						"type": "String"
+					},
+					{
+						"name": "Year",
+						"type": "String"
+					},
+					{
+						"name": "Rank",
+						"type": "String"
+					},
+					{
+						"name": "Total",
+						"type": "String"
+					},
+					{
+						"name": "S1: Demographic Pressures",
+						"type": "String"
+					},
+					{
+						"name": "S2: Refugees and IDPs",
+						"type": "String"
+					},
+					{
+						"name": "C3: Group Grievance",
+						"type": "String"
+					},
+					{
+						"name": "E3: Human Flight and Brain Drain",
+						"type": "String"
+					},
+					{
+						"name": "E2: Economic Inequality",
+						"type": "String"
+					},
+					{
+						"name": "E1: Economy",
+						"type": "String"
+					},
+					{
+						"name": "P1: State Legitimacy",
+						"type": "String"
+					},
+					{
+						"name": "P2: Public Services",
+						"type": "String"
+					},
+					{
+						"name": "P3: Human Rights",
+						"type": "String"
+					},
+					{
+						"name": "C1: Security Apparatus",
+						"type": "String"
+					},
+					{
+						"name": "C2: Factionalized Elites",
+						"type": "String"
+					},
+					{
+						"name": "X1: External Intervention",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/copyingblobtoadlsgrn2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Get_metaLinked_Services_Sources",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"copy2soucresblob": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().copy2soucresblob",
+							"type": "Expression"
+						},
+						"fileSystem": "containerblob"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/copyingdatablobtogen2')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -376,211 +609,6 @@
 					"referenceName": "SelfHostedintegrationRuntime",
 					"type": "IntegrationRuntimeReference"
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "dbo.people.CSV",
-						"fileSystem": "input"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Index",
-						"type": "String"
-					},
-					{
-						"name": "User_Id",
-						"type": "String"
-					},
-					{
-						"name": "First_Name",
-						"type": "String"
-					},
-					{
-						"name": "Last_Name",
-						"type": "String"
-					},
-					{
-						"name": "Sex",
-						"type": "String"
-					},
-					{
-						"name": "Email",
-						"type": "String"
-					},
-					{
-						"name": "Date_of_birth",
-						"type": "String"
-					},
-					{
-						"name": "Job_Title",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "dbo.people.CSV",
-						"fileSystem": "input"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Index",
-						"type": "String"
-					},
-					{
-						"name": "User_Id",
-						"type": "String"
-					},
-					{
-						"name": "First_Name",
-						"type": "String"
-					},
-					{
-						"name": "Last_Name",
-						"type": "String"
-					},
-					{
-						"name": "Sex",
-						"type": "String"
-					},
-					{
-						"name": "Email",
-						"type": "String"
-					},
-					{
-						"name": "Date_of_birth",
-						"type": "String"
-					},
-					{
-						"name": "Job_Title",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText3')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "containerblob"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "IndexOne",
-						"type": "String"
-					},
-					{
-						"name": "User_IdTwo",
-						"type": "String"
-					},
-					{
-						"name": "First_NameT",
-						"type": "String"
-					},
-					{
-						"name": "Last_NameF",
-						"type": "String"
-					},
-					{
-						"name": "SexF",
-						"type": "String"
-					},
-					{
-						"name": "EmailS",
-						"type": "String"
-					},
-					{
-						"name": "Date_of_birthSE",
-						"type": "String"
-					},
-					{
-						"name": "Job_TitleEI",
-						"type": "String"
-					},
-					{
-						"name": "extra",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText4')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "containeraglsgen2"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
 			},
 			"dependsOn": []
 		},
@@ -943,7 +971,10 @@
 				"annotations": []
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/GetMetaData')]",
+				"[concat(variables('factoryId'), '/datasets/Inside_For_Each_Sources_dataset')]",
 				"[concat(variables('factoryId'), '/datasets/inside_foreach_sink_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/copyingblobtoadlsgrn2')]",
 				"[concat(variables('factoryId'), '/datasets/copyingdatablobtogen2')]"
 			]
 		},
@@ -1019,7 +1050,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/GetMetaData')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SqlServerTable2')]",
@@ -1102,7 +1135,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/df_joins')]",
+			"name": "[concat(parameters('factoryName'), '/Dataflow clone')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1111,14 +1144,14 @@
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "df_joins",
+								"referenceName": "DelimitedText1",
 								"type": "DatasetReference"
 							},
 							"name": "source1"
 						},
 						{
 							"dataset": {
-								"referenceName": "df_joinsTwo",
+								"referenceName": "DelimitedText2",
 								"type": "DatasetReference"
 							},
 							"name": "source2"
@@ -1127,54 +1160,113 @@
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "joins_sink",
+								"referenceName": "DelimitedText4",
 								"type": "DatasetReference"
 							},
-							"name": "sink1"
+							"name": "sink1",
+							"rejectedDataLinkedService": {
+								"referenceName": "AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"dataset": {
+								"referenceName": "DelimitedText4",
+								"type": "DatasetReference"
+							},
+							"name": "sink2"
 						}
 					],
 					"transformations": [
 						{
 							"name": "join1"
+						},
+						{
+							"name": "select1"
+						},
+						{
+							"name": "filter1"
+						},
+						{
+							"name": "filter2"
 						}
 					],
 					"scriptLines": [
 						"source(output(",
-						"          Cusid as string,",
-						"          Depid as string",
+						"          Index as string,",
+						"          User_Id as string,",
+						"          First_Name as string,",
+						"          Last_Name as string,",
+						"          Sex as string,",
+						"          Email as string,",
+						"          Date_of_birth as string,",
+						"          Job_Title as string",
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> source1",
 						"source(output(",
-						"          Empid as string,",
-						"          Ename as string,",
-						"          Enum as string,",
-						"          Email as string",
+						"          Index as string,",
+						"          User_Id as string,",
+						"          First_Name as string,",
+						"          Last_Name as string,",
+						"          Sex as string,",
+						"          Email as string,",
+						"          Date_of_birth as string,",
+						"          Job_Title as string",
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> source2",
-						"source1, source2 join(Cusid == Empid,",
-						"     joinType:'outer',",
+						"source1, source2 join(source1@Index == source2@Index,",
+						"     joinType:'left',",
 						"     matchType:'exact',",
 						"     ignoreSpaces: false,",
 						"     broadcast: 'auto')~> join1",
-						"join1 sink(allowSchemaDrift: true,",
+						"join1 select(mapColumn(",
+						"          Index = source1@Index,",
+						"          User_Id = source1@User_Id,",
+						"          First_Name = source1@First_Name,",
+						"          Last_Name = source1@Last_Name,",
+						"          Sex = source1@Sex,",
+						"          Email = source1@Email,",
+						"          Date_of_birth = source1@Date_of_birth,",
+						"          Job_Title = source1@Job_Title,",
+						"          Index = source2@Index,",
+						"          User_Id = source2@User_Id,",
+						"          First_Name = source2@First_Name,",
+						"          Last_Name = source2@Last_Name,",
+						"          Sex = source2@Sex,",
+						"          Email = source2@Email,",
+						"          Date_of_birth = source2@Date_of_birth,",
+						"          Job_Title = source2@Job_Title",
+						"     ),",
+						"     partitionBy('hash', 1),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select1",
+						"select1 filter(endsWith(First_Name,'e'),",
+						"     partitionBy('hash', 1)) ~> filter1",
+						"select1 filter(startsWith(First_Name, 'J')) ~> filter2",
+						"filter2 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
+						"     filePattern:'NamestartwithJ.csv',",
+						"     umask: 0000,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> sink1",
+						"filter1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     filePattern:'endWithE.csv',",
 						"     umask: 0022,",
 						"     preCommands: [],",
 						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> sink1"
+						"     skipDuplicateMapOutputs: true) ~> sink2"
 					]
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/df_joins')]",
-				"[concat(variables('factoryId'), '/datasets/df_joinsTwo')]",
-				"[concat(variables('factoryId'), '/datasets/joins_sink')]"
-			]
+			"dependsOn": []
 		}
 	]
 }
