@@ -48,7 +48,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Emp"
+			"table": "EMP1"
 		}
 	}
 }
