@@ -1135,7 +1135,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Dataflow clone')]",
+			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1174,7 +1174,11 @@
 								"referenceName": "DelimitedText4",
 								"type": "DatasetReference"
 							},
-							"name": "sink2"
+							"name": "sink2",
+							"rejectedDataLinkedService": {
+								"referenceName": "AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"transformations": [
@@ -1244,20 +1248,20 @@
 						"     partitionBy('hash', 1),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> select1",
-						"select1 filter(endsWith(First_Name,'e'),",
+						"select1 filter(substring(First_Name,1,2) =='Sh',",
 						"     partitionBy('hash', 1)) ~> filter1",
-						"select1 filter(startsWith(First_Name, 'J')) ~> filter2",
+						"select1 filter(substring(First_Name,1,1) =='K') ~> filter2",
 						"filter2 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
-						"     filePattern:'NamestartwithJ.csv',",
-						"     umask: 0000,",
+						"     filePattern:'KnAMNE.csv',",
+						"     umask: 0022,",
 						"     preCommands: [],",
 						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> sink1",
 						"filter1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
-						"     filePattern:'endWithE.csv',",
+						"     filePattern:'SName.csv',",
 						"     umask: 0022,",
 						"     preCommands: [],",
 						"     postCommands: [],",
