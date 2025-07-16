@@ -34,7 +34,6 @@
 				"          MONTH as string,",
 				"          Sales as string",
 				"     ),",
-				"     ungroupBy(Years),",
 				"     lateral: true,",
 				"     ignoreNullPivots: false) ~> unpivot1",
 				"unpivot1 sink(allowSchemaDrift: true,",
