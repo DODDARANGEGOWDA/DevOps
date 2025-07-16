@@ -1,0 +1,65 @@
+{
+	"name": "df_Unpivout",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "sourcesUnpivout",
+						"type": "DatasetReference"
+					},
+					"name": "sourceunpivout"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "sinkDataSet",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "unpivot1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Years as string,",
+				"          Jan1 as string,",
+				"          Feb2 as string,",
+				"          Mar as string,",
+				"          Feb4 as string,",
+				"          Jan5 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceunpivout",
+				"sourceunpivout unpivot(output(",
+				"          Months as string,",
+				"          Dell as string",
+				"     ),",
+				"     ungroupBy(Years),",
+				"     lateral: true,",
+				"     ignoreNullPivots: false) ~> unpivot1",
+				"unpivot1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Empid as string,",
+				"          Ename as string,",
+				"          Agrigate as string",
+				"     ),",
+				"     partitionFileNames:['sinkDell.csv'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}
